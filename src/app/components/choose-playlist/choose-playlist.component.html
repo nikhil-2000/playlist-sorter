@@ -1,0 +1,34 @@
+<div class="full-height container">
+  <div class="">
+    <button mat-raised-button class="button" (click)="moveToGame()" >Confirm</button>
+    <div class="current-playlist">
+      Chosen Playlist Name: {{this.currentPlaylist.getName()}}<br>
+      Number of Tracks: {{this.currentPlaylist.getTracks() === null ? '' : this.currentPlaylist.getTracks().total}}
+    </div>
+
+  </div>
+
+
+  <mat-tab-group class="playlists-container" dynamicHeight (selectedTabChange)="showCorrectPlaylists($event)">
+    <mat-tab (click)="showUserPlaylists()" label="Your Playlists">
+      <mat-form-field><input matInput
+                             type="text"
+                             (keyup)="onKey($event.target.value)"
+                             placeholder="Type to filter..."></mat-form-field>
+      <app-playlist *ngFor="let playlist of this.filteredPlaylists"
+                    [playlist]="playlist"
+                    [isSelected]="isPlaylistSelected(playlist)"
+                    [showButton]="true" class = "playlist-info"></app-playlist>    </mat-tab>
+    <mat-tab (click)="showPlaylistSearch()" label="Search Playlists">
+      <mat-form-field><input matInput
+                             type="text"
+                             (keyup)="onKey($event.target.value)"
+                             placeholder="Type to filter..."></mat-form-field>
+      <app-playlist *ngFor="let playlist of this.filteredPlaylists"
+                    [playlist]="playlist"
+                    [isSelected]="isPlaylistSelected(playlist)"
+                    [showButton]="true" class = "playlist-info"></app-playlist>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

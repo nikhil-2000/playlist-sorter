@@ -1,0 +1,9 @@
+
+Login with Spotify
+Pick a playlist - Personal or Search
+Takes you to a page where you can slide songs around and order by different attributes
+ - Album Colour
+ - Popularity
+ - sort by audio features https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-audio-features
+   - Show indepth for a selected songs
+

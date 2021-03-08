@@ -1,0 +1,5 @@
+<div class="container">
+  <p class="text">Login for your playlists to appear</p>
+  <button class="button" (click)="login()" *ngIf="!this.isLoggedIn()">Login</button>
+  <button class="button" (click)="nextPage()" *ngIf="this.isLoggedIn()"> Next Page</button>
+</div>

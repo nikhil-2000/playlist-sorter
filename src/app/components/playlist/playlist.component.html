@@ -1,0 +1,7 @@
+
+<div class = "container">
+  <button mat-raised-button #buttonElement *ngIf="showButton" (click)="onSelect()" class="button">
+    &#10004;</button>
+  <img *ngIf="this.playlist.getImage().url !== ''" src="{{this.playlist.getImage().url}}" class="resize">
+  <span class="text">{{this.playlist.getName()}}</span>
+</div>

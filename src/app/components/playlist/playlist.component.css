@@ -1,0 +1,56 @@
+.container {
+  display: inline-flex; /* or inline-flex */
+  height: 30vh;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+}
+
+.resize {
+  max-width: 200px;
+  max-height: 200px;
+  min-height: 10px ;
+  min-width: 10px ;
+  width: 30vh;
+  height: 30vh;
+}
+
+.text {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 5vh;
+  /*width: 30%;*/
+  /*padding: 5%;*/
+  font-size: 100%;
+  text-align: center;
+  vertical-align: center;
+  color: black;
+}
+
+.button {
+  background-color: black;
+  box-shadow: 5px 10px #317033;
+  color: white;
+  max-width: 200px;
+  max-height: 200px;
+  min-height: 10px ;
+  min-width: 10px ;
+  width: 30vh;
+  height: 30vh;
+  margin-left: 10px;
+  margin-right: 10px;
+  align-self: center;
+  vertical-align: center;
+}
+
+.button:hover {
+  background-color: #222222;
+}
+
+.button:focus {
+  outline: none;
+  background-color: white;
+  color: black;
+  -webkit-box-shadow: inset 0px 0px 15px #317033;
+  -moz-box-shadow: inset 0px 0px 15px #317033;
+  box-shadow: inset 0px 0px 15px #317033;}
