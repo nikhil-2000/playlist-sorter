@@ -8,13 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { ChoosePlaylistComponent } from './components/choose-playlist/choose-playlist.component';
 import { LoginComponent } from './components/login/login.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+import { PlaylistSorterPageComponent } from './components/playlist-sorter-page/playlist-sorter-page.component';
 
 
 
@@ -24,7 +24,8 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
     HomeComponent,
     ChoosePlaylistComponent,
     LoginComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    PlaylistSorterPageComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,7 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

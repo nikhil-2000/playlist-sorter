@@ -1,6 +1,6 @@
 <div class="full-height container">
   <div class="">
-    <button mat-raised-button class="button" (click)="moveToGame()" >Confirm</button>
+    <button mat-raised-button class="button" (click)="moveToSorter()" >Confirm</button>
     <div class="current-playlist">
       Chosen Playlist Name: {{this.currentPlaylist.getName()}}<br>
       Number of Tracks: {{this.currentPlaylist.getTracks() === null ? '' : this.currentPlaylist.getTracks().total}}

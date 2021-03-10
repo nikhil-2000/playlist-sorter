@@ -62,12 +62,12 @@ export class ChoosePlaylistComponent implements OnInit {
     }
   }
 
-  moveToGame(): void {
+  moveToSorter(): void {
     if (this.currentPlaylist.getName() === '') {
       alert('Choose a playlist');
     }else {
       this.spotifyService.chosenPlaylist = this.currentPlaylist;
-      this.router.navigate(['/game']);
+      this.router.navigate(['/sorter']);
     }
   }
 
