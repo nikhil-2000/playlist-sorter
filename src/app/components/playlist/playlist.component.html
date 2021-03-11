@@ -3,5 +3,8 @@
   <button mat-raised-button #buttonElement *ngIf="showButton" (click)="onSelect()" class="button">
     &#10004;</button>
   <img *ngIf="this.playlist.getImage().url !== ''" src="{{this.playlist.getImage().url}}" class="resize">
-  <span class="text">{{this.playlist.getName()}}</span>
+  <div class="text">{{this.playlist.getName()}}</div>
+  <div style="padding: 20px;">
+    Songs: {{this.playlist.getTracks().total}}
+  </div>
 </div>

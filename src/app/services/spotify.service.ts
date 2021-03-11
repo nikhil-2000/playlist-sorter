@@ -72,7 +72,7 @@ export class SpotifyService {
     return this.http.get(query, {headers : this.getStandardHeader()});
   }
 
-  getTracks(playlist: Playlist): Observable<any> {
+  getTracks(playlist: Playlist): Observable<any> {;
     const query = playlist.getTracks().href;
     return this.http.get(query, {headers : this.getStandardHeader()});
   }

@@ -25,6 +25,8 @@ export class PlaylistComponent implements OnInit {
       img.url = 'assets/no_playlist_image.png';
       this.playlist.setImage(img);
     }
+
+    console.log(this.playlist.getTracks().total);
   }
 
   onSelect(): void {

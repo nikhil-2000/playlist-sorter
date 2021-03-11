@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     console.log(window.location.href);
   }
 
-  startGame(): void {
+  login(): void {
     this.router.navigate((['login']));
   }
   check(): void{

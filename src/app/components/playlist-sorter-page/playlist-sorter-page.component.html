@@ -1,1 +1,6 @@
-<p>playlist-sorter-page works!</p>
+
+<div class="full-height container">
+  <app-playlist class="playlist" [playlist]="this.playlist" [isSelected]="false" [showButton]="false"></app-playlist>
+  <div *ngFor="let track of this.tracks"
+                >{{track.name}}</div>
+</div>
