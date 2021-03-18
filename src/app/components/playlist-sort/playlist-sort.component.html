@@ -1,0 +1,34 @@
+<div class = "container">
+  <img *ngIf="this.playlist.getImage().url !== ''" src="{{this.playlist.getImage().url}}" class="resize">
+  <p class="text">{{this.playlist.getName()}}</p>
+  <p class="text"> Songs: {{this.playlist.getTracks().length}} </p>
+  <div class="option-container">
+    <label id="sorting-radio-group-label">Sort By:</label>
+    <mat-radio-group
+      aria-labelledby="sorting-radio-group-label"
+      class="option-radio-group"
+      [(ngModel)]="sortingMethod">
+      <mat-radio-button class="option-method-button" *ngFor="let method of methods" [value]="method"
+                        (click)="updateMethod(method)">
+        {{method}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class = "option-container">
+    <label id="order-radio-group-label">Order By:</label>
+    <mat-radio-group
+      aria-labelledby="order-radio-group-label"
+      class="option-radio-group"
+      [(ngModel)]="isAscending">
+      <mat-radio-button class="option-method-button" [value]="true"
+                        (click)="updateOrder(true)">
+        Ascending
+      </mat-radio-button>
+      <mat-radio-button class="option-method-button" [value]="false"
+                        (click)="updateOrder(false)">
+        Descending
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+</div>

@@ -1,4 +1,4 @@
-<div class="full-height container">
+<div class="container">
   <div class="">
     <button mat-raised-button class="button" (click)="moveToSorter()" >Confirm</button>
     <div class="current-playlist">
@@ -9,25 +9,34 @@
   </div>
 
 
-  <mat-tab-group class="playlists-container" dynamicHeight (selectedTabChange)="showCorrectPlaylists($event)">
-    <mat-tab (click)="showUserPlaylists()" label="Your Playlists">
+  <mat-tab-group class="playlists-container" dynamicHeight (selectedTabChange)="showCorrectPlaylists($event)"
+                 [color]="'primary'">
+    <mat-tab (click)="showUserPlaylists()" label="Your Playlists" class="mat-tab-label" color = "white">
       <mat-form-field><input matInput
                              type="text"
                              (keyup)="onKey($event.target.value)"
                              placeholder="Type to filter..."></mat-form-field>
-      <app-playlist *ngFor="let playlist of this.filteredPlaylists"
-                    [playlist]="playlist"
-                    [isSelected]="isPlaylistSelected(playlist)"
-                    [showButton]="true" class = "playlist-info"></app-playlist>    </mat-tab>
-    <mat-tab (click)="showPlaylistSearch()" label="Search Playlists">
+      <mat-card class = "playlist" *ngFor="let playlist of this.filteredPlaylists">
+        <app-playlist [playlist]="playlist"
+                      [isSelected]="isPlaylistSelected(playlist)"
+                      [showButton]="true"
+                      class = "playlist-info"></app-playlist>
+      </mat-card>
+
+    </mat-tab>
+    <mat-tab (click)="showPlaylistSearch()" label="Search Playlists" >
       <mat-form-field><input matInput
                              type="text"
                              (keyup)="onKey($event.target.value)"
                              placeholder="Type to filter..."></mat-form-field>
-      <app-playlist *ngFor="let playlist of this.filteredPlaylists"
+      <mat-card class = "playlist" *ngFor="let playlist of this.filteredPlaylists">
+      <app-playlist
                     [playlist]="playlist"
                     [isSelected]="isPlaylistSelected(playlist)"
-                    [showButton]="true" class = "playlist-info"></app-playlist>
+                    [showButton]="true"
+                    class = "playlist-info"></app-playlist>
+      </mat-card>
+
     </mat-tab>
   </mat-tab-group>
 

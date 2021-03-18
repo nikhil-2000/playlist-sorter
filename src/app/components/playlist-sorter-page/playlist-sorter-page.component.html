@@ -1,6 +1,19 @@
 
-<div class="full-height container">
-  <app-playlist class="playlist" [playlist]="this.playlist" [isSelected]="false" [showButton]="false"></app-playlist>
-  <div *ngFor="let track of this.tracks"
-                >{{track.name}}</div>
+<div class="full-height">
+
+  <div class = "container">
+    <mat-card class = "playlist-holder">
+      <app-playlist-sort  class ="playlist" [playlist]="this.playlist"
+                          (methodEmitter) = "updateMethod($event)"
+                          (orderEmitter)="updateOrder($event)"
+      ></app-playlist-sort>
+    </mat-card>
+    <mat-card *ngFor="let track of this.tracks" class = "track">
+      <img *ngIf="this.playlist.getImage().url !== ''" src="{{track.getImage().url}}" class="resize">
+      <div class="text ">{{track.getName()}}</div>
+      <div class="text ">{{track.getArtists()[0].name}}</div>
+      <div class="text ">{{track.getAlbum().name}}</div>
+    </mat-card>
+  </div>
+
 </div>

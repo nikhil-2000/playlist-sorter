@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 import {Observable, Subscription} from 'rxjs';
 import {Playlist} from '../models/playlist';
+import {Track} from '../models/track';
 
 
 @Injectable({
@@ -72,8 +73,13 @@ export class SpotifyService {
     return this.http.get(query, {headers : this.getStandardHeader()});
   }
 
-  getTracks(playlist: Playlist): Observable<any> {;
+  getTracks(playlist: Playlist): Observable<any> {
     const query = playlist.getTracks().href;
+    return this.http.get(query, {headers : this.getStandardHeader()});
+  }
+
+  getTrackFeatures(track : Track): Observable<any> {
+    const query = 'https://api.spotify.com/v1/audio-features/' + track.id;
     return this.http.get(query, {headers : this.getStandardHeader()});
   }
 
@@ -92,3 +98,10 @@ interface TokenResponse {
 }
 
 
+// {
+//   "access_token": "BQCPJwkDgEJo1UpikkaOCycpBv29wynmJpKLfJRnA24AJl96vLM_4MH1FGcI3c5T_LFa27riMSmL4zx6r_gPnhIKRWIlkfoOH8Cw1lRHbpRLhVCtseUkwd899IfYuGNJHUj-Fjdfyy3f0PwZ3H4y2KNZEpH47T6xhGAVg89Ffd--vu2952hanQ",
+//   "token_type": "Bearer",
+//   "expires_in": 3600,
+//   "refresh_token": "AQB7iHKWj-6unvKmyTTxmE8QxgbYYyL1UfE9RSFe8w7Ki6empiESe28Itd_-GoJRaseg1DZPhumV-m064GjUA3MOLPwxKy3N78rk48fx-gJH0WRatBBrIbk-YYUP7AySAts",
+//   "scope": "playlist-read-private playlist-read-collaborative"
+// }

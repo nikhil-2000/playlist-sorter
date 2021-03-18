@@ -1,13 +1,21 @@
 <div class="container">
-  <mat-card mat-card-content class="content center">
+  <div class="content center">
       <div>
-        <h1 class=" text"> Playlist Sorter </h1>
-        <p> Sort your playlists by popularity, album colour and much more...</p>
+        <h1 class = "text" > <b>Playlist Sorter</b> </h1>
+        <p class = "text" > Sort your playlists by popularity, album colour and much more...</p>
         <button mat-raised-button color="primary" (click)="login()"> Begin</button>
       </div>
-  </mat-card>
+  </div>
   <mat-card mat-card-content class="image center">
-    <h1 class=" text"> Playlist Image </h1>
+    <mat-card class = "track">
+      <app-playlist class="playlist" [playlist]="this.playlist" [showButton]="false"></app-playlist>
+    </mat-card>
+    <mat-card *ngFor="let track of this.tracks" class = "track">
+      <img *ngIf="this.playlist.getImage().url !== ''" src="{{track.getImage().url}}" class="resize">
+      <div class="track-text">{{track.getName()}}</div>
+      <div class="track-text">{{track.getArtists()[0].name}}</div>
+      <div class="track-text">{{track.getAlbum().name}}</div>
+    </mat-card>
   </mat-card>
 
 

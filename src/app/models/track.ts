@@ -1,13 +1,28 @@
-export class Track {
-  audio;
+import { Image } from './image';
+import { SpotifyService } from '../services/spotify.service';
+import {Injectable} from '@angular/core';
 
-  constructor(private name: string , private preview, private popularity, private artists, private album) {
-    this.name = name;
-    this.preview = preview;
-    this.popularity = popularity;
-    this.artists = artists;
-    this.album = album;
+
+export class Track {
+  audio;  name;  preview;  popularity;  artists;  album;  image; id; danceability; tempo;
+
+  constructor( private trackObject: any) {
+    this.name = trackObject.name;
+    this.preview = trackObject.preview;
+    this.popularity = trackObject.popularity;
+    this.artists = trackObject.artists;
+    this.album = trackObject.album;
     this.audio = new Audio(this.preview);
+    this.image = new Image();
+    this.image.url = trackObject.album.images[0].url;
+    this.image.height = trackObject.album.images[0].height;
+    this.image.width = trackObject.album.images[0].width;
+    this.id = trackObject.id;
+  }
+
+  addAudioFeatures(featuresObject: any): void{
+    this.danceability = featuresObject.danceability;
+    this.tempo = featuresObject.tempo;
   }
 
   getName(): string {
@@ -30,4 +45,8 @@ export class Track {
     return this.album;
   }
 
+  getImage(): any {
+    return this.image;
+  }
 }
+

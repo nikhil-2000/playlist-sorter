@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  width : 100%;
+}
+
+.resize {
+  max-width: 200px;
+  max-height: 200px;
+  min-height: 10px ;
+  min-width: 10px ;
+  width: 100%;
+  height: 100%;
+}
+
+.text {
+  color: black;
+  width: 25%;
+  padding: 10px;
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
+}
+
+.option-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+}
+
+.option-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-radio-group {
+  padding: 10px;
+}
+
+.option-method-button {
+  flex: 1;
+}
