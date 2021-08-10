@@ -10,12 +10,18 @@
 
 
   <mat-tab-group class="playlists-container" dynamicHeight (selectedTabChange)="showCorrectPlaylists($event)"
-                 [color]="'primary'">
-    <mat-tab (click)="showUserPlaylists()" label="Your Playlists" class="mat-tab-label" color = "white">
-      <mat-form-field><input matInput
-                             type="text"
-                             (keyup)="onKey($event.target.value)"
-                             placeholder="Type to filter..."></mat-form-field>
+                 >
+    <mat-tab (click)="showUserPlaylists()" label="Your Playlists" class="mat-tab-label">
+
+      <form class="filter-form">
+        <mat-form-field class="filter-mat-form-field">
+          <mat-label>Type to Filter...</mat-label>
+          <input matInput
+                 type="text"
+                 (keyup)="onKey($event.target.value)"/>
+        </mat-form-field>
+      </form>
+
       <mat-card class = "playlist" *ngFor="let playlist of this.filteredPlaylists">
         <app-playlist [playlist]="playlist"
                       [isSelected]="isPlaylistSelected(playlist)"
@@ -25,10 +31,15 @@
 
     </mat-tab>
     <mat-tab (click)="showPlaylistSearch()" label="Search Playlists" >
-      <mat-form-field><input matInput
-                             type="text"
-                             (keyup)="onKey($event.target.value)"
-                             placeholder="Type to filter..."></mat-form-field>
+      <form class="filter-form">
+        <mat-form-field class="filter-mat-form-field">
+          <mat-label>Type to Filter...</mat-label>
+          <input matInput
+                 type="text"
+                 (keyup)="onKey($event.target.value)"/>
+        </mat-form-field>
+      </form>
+
       <mat-card class = "playlist" *ngFor="let playlist of this.filteredPlaylists">
       <app-playlist
                     [playlist]="playlist"

@@ -2,21 +2,15 @@
   display: flex;
   flex-direction: row;
   flex : 1;
-  width : 90%;
+  /*width : 90%;*/
   margin: 20px;
+  padding: 20px;
   align-items: center;
   background-color: #1DB954;
 }
 
 .container {
-  /*color:white;*/
-  background-color: white;
-}
-
-
-.container{
-  /*display: flex;*/
-  /*flex-wrap: wrap;*/
+  background-color: black;
   padding: 10px;
 }
 
@@ -27,8 +21,8 @@
 .playlists-container {
   display: flex; /* or inline-flex */
   flex-wrap: nowrap;
-  /*width:100%;*/
-  /*margin: auto;*/
+  width:95%;
+  margin: auto;
   padding: 20px;
   text-align: center;
 }
@@ -37,8 +31,8 @@
   width: 20%;
   height: 80%;
   margin: 5px;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 .button:hover {
@@ -59,3 +53,52 @@
   margin: 10px  10px 10px 6px;
 }
 
+.mat-tab-label {
+  /*min-width: 25px !important;*/
+  /*padding: 5px;*/
+  color: white;
+  font-weight: 300;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+  /*min-width: 25px !important;*/
+  /*padding: 5px;*/
+  color: white;
+  font-weight: 300;
+}
+
+/* Styles for the ink bar */
+.mat-ink-bar {
+  background-color: white;
+}
+
+.mat-form-field {
+  background-color: black;
+  color: white;
+}
+
+.filter-mat-form-field {
+  width: 350px;
+  font-size: 14px;
+  margin-bottom: -15px;
+}
+
+.filter-mat-form-field mat-label {
+  color: white;
+  /* add label text color here */
+}
+
+.filter-mat-form-field .mat-input-element {
+  color: white;
+  /* add input text color here */
+}
+
+.filter-mat-form-field .mat-input-element::placeholder {
+  color: white;
+  /* add placeholder css here */
+}
+
+.filter-input {
+  color: white;
+}

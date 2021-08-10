@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { SpotifyService} from '../../services/spotify.service';
 import { Playlist } from '../../models/playlist';
 import {Router} from '@angular/router';
@@ -9,7 +9,8 @@ import {MatTabChangeEvent} from '@angular/material/tabs';
 @Component({
   selector: 'app-choose-playlist',
   templateUrl: './choose-playlist.component.html',
-  styleUrls: ['./choose-playlist.component.css']
+  styleUrls: ['./choose-playlist.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ChoosePlaylistComponent implements OnInit {
 
@@ -32,6 +33,7 @@ export class ChoosePlaylistComponent implements OnInit {
     this.choosePlaylistService.playlistSubject.subscribe(
       value => this.currentPlaylist = value
     );
+    console.log(this.userPlaylists);
   }
 
   convertToPlaylistObject(playlistsResponse): Array<Playlist> {

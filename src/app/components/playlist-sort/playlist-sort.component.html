@@ -1,7 +1,7 @@
 <div class = "container">
   <img *ngIf="this.playlist.getImage().url !== ''" src="{{this.playlist.getImage().url}}" class="resize">
   <p class="text">{{this.playlist.getName()}}</p>
-  <p class="text"> Songs: {{this.playlist.getTracks().length}} </p>
+  <p class="text"> Songs: {{this.playlist.getTracks().total}} </p>
   <div class="option-container">
     <label id="sorting-radio-group-label">Sort By:</label>
     <mat-radio-group

@@ -3,6 +3,8 @@ import {SpotifyService} from '../../services/spotify.service';
 import {Playlist} from '../../models/playlist';
 import {Track} from '../../models/track';
 import {Image} from '../../models/image';
+import * as IJS from 'image-js';
+
 
 
 @Component({
@@ -62,6 +64,18 @@ export class PlaylistSorterPageComponent implements OnInit {
       this.tracks = this.tracks
         .sort((a, b) => (a.danceability < b.danceability ? -this.order : this.order));
     }
+    if (this.method.toLowerCase() === 'colour') {
+      this.sortByColour();
+    }
+  }
+
+  sortByColour(): void{
+    // this.tracks = this.tracks.map(t => {
+    //   t.image.picture = IJS.Image.load(t.image.url);
+    //   return t;
+    // });
+    // const i = new IJS.Image();
+    console.log(this.tracks);
   }
 
   updateOrder(order: boolean): void{
