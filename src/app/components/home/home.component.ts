@@ -1956,4 +1956,4 @@ const tracks = [
   // }
 ].map(track => new Track(track));
 
-mockPlaylist = new Playlist(mockPlaylistData.name, image, tracks);
+mockPlaylist = new Playlist(mockPlaylistData.name, image, tracks,"59ZbFPES4DQwEjBpWHzrtC");

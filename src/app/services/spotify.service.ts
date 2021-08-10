@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import * as querystring from 'querystring';
-import { environment } from '../../environments/environment.prod';
+import {environment} from '../../environments/environment.prod';
 import {DefaultUrlSerializer} from '@angular/router';
-import { Router } from '@angular/router';
-import { AuthenticationService } from './authentication.service';
+import {Router} from '@angular/router';
+import {AuthenticationService} from './authentication.service';
 import {Observable, Subscription} from 'rxjs';
 import {Playlist} from '../models/playlist';
 import {Track} from '../models/track';
@@ -17,21 +17,22 @@ import {Track} from '../models/track';
 export class SpotifyService {
 
   tokens: TokenResponse = {
-    access_token : '',
-    refresh_token : ''
+    access_token: '',
+    refresh_token: ''
   };
 
   chosenPlaylist: Playlist;
 
+
   constructor(private http: HttpClient,
               private authService: AuthenticationService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
-  rerouteIfLoggedIn(): void{
-    if (this.getCode() === ''){
+  rerouteIfLoggedIn(): void {
+    if (this.getCode() === '') {
       console.log('Empty Code Still');
-    }
-    else if (this.tokens.access_token === ''){
+    } else if (this.tokens.access_token === '') {
       this.getAccessToken().subscribe(tokens => this.tokens = tokens);
     }
   }
@@ -51,7 +52,7 @@ export class SpotifyService {
   getAccessToken(): Observable<TokenResponse> {
     const code = this.getCode();
     const query = 'https://accounts.spotify.com/api/token';
-    const body =  querystring.stringify( {
+    const body = querystring.stringify({
       code,
       redirect_uri: this.authService.redirectURI,
       grant_type: 'authorization_code'
@@ -63,31 +64,39 @@ export class SpotifyService {
 
   }
 
-  getUserPlaylists(): Observable<any> {
-    const query = 'https://api.spotify.com/v1/me/playlists';
-    return this.http.get(query, {headers : this.getStandardHeader()});
+  getUserPlaylists(limit: number, offset: number): Observable<any> {
+    const query = 'https://api.spotify.com/v1/me/playlists?limit=' + limit.toString() + '&offset=' + offset.toString();
+    return this.http.get(query, {headers: this.getStandardHeader()});
   }
 
   getUserLibrary(): Observable<any> {
     const query = 'https://api.spotify.com/v1/me/tracks';
-    return this.http.get(query, {headers : this.getStandardHeader()});
+    return this.http.get(query, {headers: this.getStandardHeader()});
   }
 
-  getTracks(playlist: Playlist): Observable<any> {
-    const query = playlist.getTracks().href;
-    return this.http.get(query, {headers : this.getStandardHeader()});
+  getTracks(playlist: Playlist, limit: number, offset: number): Observable<any> {
+    const query = 'https://api.spotify.com/v1/playlists/' + playlist.getId() + '/tracks?offset=' + offset.toString() + '&limit=' + limit.toString();
+    return this.http.get(query, {headers: this.getStandardHeader()});
   }
 
-  getTrackFeatures(track : Track): Observable<any> {
+  getTrackFeatures(track: Track): Observable<any> {
     const query = 'https://api.spotify.com/v1/audio-features/' + track.id;
-    return this.http.get(query, {headers : this.getStandardHeader()});
+    return this.http.get(query, {headers: this.getStandardHeader()});
+  }
+
+  getMultipleTrackFeatures(tracks: Array<Track>): Observable<any> {
+    let query = 'https://api.spotify.com/v1/audio-features?ids=';
+    const ids = tracks.map(t => t.id);
+    query = query + ids.join('%2C');
+    console.log(query);
+    return this.http.get(query, {headers: this.getStandardHeader()});
   }
 
   search(term: string, type: string): Observable<any> {
-    console.log(this.tokens)
+    console.log(this.tokens);
     const termNoSpaces = term.replace(' ', '+');
     const query = 'https://api.spotify.com/v1/search?q=' + termNoSpaces + '&type=' + type;
-    return this.http.get(query, {headers : this.getStandardHeader()});
+    return this.http.get(query, {headers: this.getStandardHeader()});
 
   }
 }

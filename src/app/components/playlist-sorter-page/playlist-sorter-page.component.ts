@@ -18,13 +18,17 @@ export class PlaylistSorterPageComponent implements OnInit {
   constructor(private spotifyService: SpotifyService) { }
   playlist: Playlist;
   tracks: Array<Track>;
+  total: number;
 
   method: string;
   order = 1;
 
   ngOnInit(): void {
     this.playlist = this.spotifyService.chosenPlaylist;
+    this.total = this.playlist.getTracks().total;
+    this.tracks = [];
     this.getTracks();
+
     // console.log(this.playlist);
     // this.playlist = mockPlaylist;
     // this.tracks = tracks;
@@ -32,22 +36,28 @@ export class PlaylistSorterPageComponent implements OnInit {
 
   convertToTracks(data): Array<Track> {
     const tracks = data.items.map(track => track.track);
-    const removingNullPreview = tracks.filter(track => track.preview_url !== null);
-    return removingNullPreview
-      .map(track => new Track(track));
+    return tracks.map(track => new Track(track));
   }
 
   getTracks(): void {
-    this.spotifyService.getTracks(this.playlist).subscribe(
-      data => {
-        this.tracks = this.convertToTracks(data);
-        this.tracks.forEach(t => {
-          return this.spotifyService.getTrackFeatures(t).subscribe(
-            feature => t.addAudioFeatures(feature)
+    let offset = 0;
+    const limit = 50;
+    while (this.total > offset) {
+      this.spotifyService.getTracks(this.playlist, limit, offset).subscribe(
+        data => {
+          // console.log(data);
+          const newTracks = this.convertToTracks(data);
+          this.spotifyService.getMultipleTrackFeatures(newTracks).subscribe(
+            audio_data => {
+              audio_data = audio_data.audio_features;
+              audio_data.forEach((t, i) => newTracks[i].addAudioFeatures(t));
+            }
           );
-        });
-      }
-    );
+          this.tracks = this.tracks.concat(newTracks);
+        }
+      );
+      offset = offset + limit;
+    }
   }
 
   sortTracks(): void {
@@ -64,6 +74,18 @@ export class PlaylistSorterPageComponent implements OnInit {
       this.tracks = this.tracks
         .sort((a, b) => (a.danceability < b.danceability ? -this.order : this.order));
     }
+    if (this.method.toLowerCase() === 'energy') {
+      this.tracks = this.tracks
+        .sort((a, b) => (a.energy < b.energy ? -this.order : this.order));
+    }
+    if (this.method.toLowerCase() === 'loudness') {
+      this.tracks = this.tracks
+        .sort((a, b) => (a.loudness < b.loudness ? -this.order : this.order));
+    }
+    if (this.method.toLowerCase() === 'positivity') {
+      this.tracks = this.tracks
+        .sort((a, b) => (a.valence < b.valence ? -this.order : this.order));
+    }
     if (this.method.toLowerCase() === 'colour') {
       this.sortByColour();
     }
@@ -75,7 +97,7 @@ export class PlaylistSorterPageComponent implements OnInit {
     //   return t;
     // });
     // const i = new IJS.Image();
-    console.log(this.tracks);
+    // console.log(this.tracks);
   }
 
   updateOrder(order: boolean): void{
@@ -2020,4 +2042,4 @@ const tracks = [
   },
 ].map(track => new Track(track));
 
-mockPlaylist = new Playlist(mockPlaylistData.name, image, tracks);
+mockPlaylist = new Playlist(mockPlaylistData.name, image, tracks, '59ZbFPES4DQwEjBpWHzrtC');

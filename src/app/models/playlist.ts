@@ -3,10 +3,11 @@ import {Track} from './track';
 
 export class Playlist {
 
-  constructor(private name: string, private image: Image, private tracks: Array<Track>) {
+  constructor(private name: string, private image: Image, private tracks: Array<Track>, private id: string) {
     this.name = name;
     this.image = image;
     this.tracks = tracks;
+    this.id = id;
   }
 
   getName(): string {
@@ -15,6 +16,10 @@ export class Playlist {
 
   getImage(): Image {
     return this.image;
+  }
+
+  getId(): string {
+    return this.id;
   }
 
   setImage(image): void {

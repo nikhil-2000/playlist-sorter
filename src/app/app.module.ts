@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
+import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -38,7 +39,7 @@ import { PlaylistSortComponent } from './components/playlist-sort/playlist-sort.
     MatButtonModule,
     MatCardModule,
     MatTabsModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

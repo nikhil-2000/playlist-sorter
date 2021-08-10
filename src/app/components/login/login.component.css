@@ -15,3 +15,12 @@
   align-items: center;
   /*background-color: #45b6fe;*/
 }
+
+.text {
+  color: white;
+}
+
+.button {
+  background: white;
+  color: black;
+}

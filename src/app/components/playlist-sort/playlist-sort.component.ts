@@ -15,7 +15,7 @@ export class PlaylistSortComponent implements OnInit {
   @Output() orderEmitter = new EventEmitter<boolean>();
 
   sortingMethod: string;
-  methods: string[] = ['Colour', 'Danceability', 'Popularity', 'Tempo'];
+  methods: string[] = ['Colour', 'Danceability', 'Popularity', 'Tempo','Energy', 'Positivity', 'Loudness'];
 
   isAscending: boolean;
 

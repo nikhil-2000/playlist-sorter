@@ -14,26 +14,43 @@ import {MatTabChangeEvent} from '@angular/material/tabs';
 })
 export class ChoosePlaylistComponent implements OnInit {
 
-  userPlaylists = this.convertToPlaylistObject(mockPlaylists);
+  // userPlaylists = this.convertToPlaylistObject(mockPlaylists);
+  userPlaylists = new Array<Playlist>();
   filteredPlaylists = new Array<Playlist>();
-  currentPlaylist = new Playlist('', null, null);
+  currentPlaylist = new Playlist('', null, null, null);
   isUserPlaylists = true;
-
+  nextIsNull = false;
+  maxPlaylists = 1000;
 
   constructor(private router: Router, public spotifyService: SpotifyService, public choosePlaylistService: ChoosePlaylistService) {}
 
   ngOnInit(): void {
     this.onKey('');
-    this.spotifyService.getUserPlaylists().subscribe(
-      data => {
-        this.userPlaylists = this.convertToPlaylistObject(data.items);
-        this.onKey('');
+    // While the userPLaylist.next != Null && Loop started
+    const limit = 50;
+    let offset = 0;
+    while (!this.nextIsNull) {
+      this.spotifyService.getUserPlaylists(limit, offset).subscribe(
+        data => {
+          const newPlaylists = this.convertToPlaylistObject(data.items);
+          this.userPlaylists = this.userPlaylists.concat(newPlaylists);
+          this.onKey('');
+        }
+      );
+      offset = offset + limit;
+      if (offset > this.maxPlaylists) {
+        this.nextIsNull = true;
       }
-    );
+    }
+
     this.choosePlaylistService.playlistSubject.subscribe(
       value => this.currentPlaylist = value
     );
-    console.log(this.userPlaylists);
+  }
+
+  updateNextIsNull(): void {
+    this.nextIsNull = true;
+    console.log("STOP QUERYING");
   }
 
   convertToPlaylistObject(playlistsResponse): Array<Playlist> {
@@ -42,7 +59,7 @@ export class ChoosePlaylistComponent implements OnInit {
     const convertedPlaylists = new Array<Playlist>();
 
     for (const playlistData of playlistsResponse) {
-      const playlist = new Playlist(playlistData.name, playlistData.images[0], playlistData.tracks);
+      const playlist = new Playlist(playlistData.name, playlistData.images[0], playlistData.tracks, playlistData.id);
       convertedPlaylists.push(playlist);
     }
     return convertedPlaylists;

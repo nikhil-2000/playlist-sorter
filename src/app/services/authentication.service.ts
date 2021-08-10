@@ -9,8 +9,8 @@ import {environment} from '../../environments/environment.prod';
 })
 export class AuthenticationService {
   redirectURI = window.location.href.includes('localhost')
-    ? 'http://localhost:4200/login'
-    : '';
+    ? 'http://localhost:4200/home'
+    : 'https://playlistsorter-e5e4f.web.app/home';
 
   constructor() { }
 
