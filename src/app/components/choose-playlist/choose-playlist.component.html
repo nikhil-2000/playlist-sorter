@@ -1,9 +1,16 @@
 <div class="container">
-  <div class="">
-    <button mat-raised-button class="button" (click)="moveToSorter()" >Confirm</button>
+  <div class="button-and-info">
+    <button mat-raised-button class="confirm-button" (click)="moveToSorter()" >
+      Confirm
+    </button>
     <div class="current-playlist">
-      Chosen Playlist Name: {{this.currentPlaylist.getName()}}<br>
-      Number of Tracks: {{this.currentPlaylist.getTracks() === null ? '' : this.currentPlaylist.getTracks().total}}
+      <div class="current-playlist-text">
+        Chosen Playlist Name:<br>
+        Number of Tracks:
+      </div>
+      <div class="current-playlist-text">
+        {{this.currentPlaylist.getName()}}<br>{{this.currentPlaylist.getTracks() === null ? '' : this.currentPlaylist.getTracks().total}}
+      </div>
     </div>
 
   </div>

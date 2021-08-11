@@ -8,6 +8,7 @@ import {AuthenticationService} from './authentication.service';
 import {Observable, Subscription} from 'rxjs';
 import {Playlist} from '../models/playlist';
 import {Track} from '../models/track';
+import {concatMap} from "rxjs/operators";
 
 
 @Injectable({
@@ -31,9 +32,11 @@ export class SpotifyService {
 
   rerouteIfLoggedIn(): void {
     if (this.getCode() === '') {
-      console.log('Empty Code Still');
     } else if (this.tokens.access_token === '') {
-      this.getAccessToken().subscribe(tokens => this.tokens = tokens);
+      this.getAccessToken().pipe(concatMap(tokens => {
+        this.tokens = tokens;
+        return this.getUser();
+      })).subscribe(data => console.log(data));
     }
   }
 
@@ -64,6 +67,12 @@ export class SpotifyService {
 
   }
 
+
+  getUser(): Observable<any>{
+    const query = 'https://api.spotify.com/v1/me';
+    return this.http.get(query, {headers: this.getStandardHeader()});
+  }
+
   getUserPlaylists(limit: number, offset: number): Observable<any> {
     const query = 'https://api.spotify.com/v1/me/playlists?limit=' + limit.toString() + '&offset=' + offset.toString();
     return this.http.get(query, {headers: this.getStandardHeader()});
@@ -88,15 +97,27 @@ export class SpotifyService {
     let query = 'https://api.spotify.com/v1/audio-features?ids=';
     const ids = tracks.map(t => t.id);
     query = query + ids.join('%2C');
-    console.log(query);
     return this.http.get(query, {headers: this.getStandardHeader()});
   }
 
   search(term: string, type: string): Observable<any> {
-    console.log(this.tokens);
     const termNoSpaces = term.replace(' ', '+');
     const query = 'https://api.spotify.com/v1/search?q=' + termNoSpaces + '&type=' + type;
     return this.http.get(query, {headers: this.getStandardHeader()});
+  }
+
+  createNewPlaylist(method: string, tracks: Array<Track>, playlist_id: string): void {
+//   firstPOSTCallToAPI('url', data).pipe(
+//     concatMap(result1 => secondPOSTCallToAPI('url', result1))
+//   concatMap( result2 => thirdPOSTCallToAPI('url', result2))
+//   concatMap(result3 => fourthPOSTCallToAPI('url', result3))
+// ....
+// ).subscribe(
+//     success => { /* display success msg */ },
+// errorData => { /* display error msg */ }
+// );
+    const createNewPlaylist = 'https://api.spotify.com/v1/users/{user_id}/playlists';
+    const addSongsInOrder = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks';
 
   }
 }

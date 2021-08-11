@@ -2,6 +2,9 @@
 <div class="full-height">
 
   <div class = "container">
+    <button mat-raised-button class="add-playlist-button" (click)="addToSpotify()" >
+      Add to Spotify
+    </button>
     <mat-card class = "playlist-holder">
       <app-playlist-sort  class ="playlist" [playlist]="this.playlist"
                           (methodEmitter) = "updateMethod($event)"

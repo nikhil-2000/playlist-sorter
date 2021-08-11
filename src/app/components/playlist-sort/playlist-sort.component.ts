@@ -30,7 +30,6 @@ export class PlaylistSortComponent implements OnInit {
       this.playlist.setImage(img);
     }
 
-    console.log(this.playlist.getTracks().total);
   }
 
   updateMethod(method: string): void {

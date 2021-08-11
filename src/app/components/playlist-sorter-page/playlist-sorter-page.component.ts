@@ -4,6 +4,7 @@ import {Playlist} from '../../models/playlist';
 import {Track} from '../../models/track';
 import {Image} from '../../models/image';
 import * as IJS from 'image-js';
+import {error} from 'selenium-webdriver';
 
 
 
@@ -45,7 +46,6 @@ export class PlaylistSorterPageComponent implements OnInit {
     while (this.total > offset) {
       this.spotifyService.getTracks(this.playlist, limit, offset).subscribe(
         data => {
-          // console.log(data);
           const newTracks = this.convertToTracks(data);
           this.spotifyService.getMultipleTrackFeatures(newTracks).subscribe(
             audio_data => {
@@ -62,30 +62,6 @@ export class PlaylistSorterPageComponent implements OnInit {
 
   sortTracks(): void {
 
-    // if (this.method.toLowerCase() === 'popularity') {
-    //   this.tracks = this.tracks
-    //     .sort((a, b) => (a.getPopularity() < b.getPopularity() ? -this.order : this.order));
-    // }
-    // if (this.method.toLowerCase() === 'tempo') {
-    //   this.tracks = this.tracks
-    //     .sort((a, b) => (a['tempo'] < b['tempo'] ? -this.order : this.order));
-    // }
-    // if (this.method.toLowerCase() === 'danceability') {
-    //   this.tracks = this.tracks
-    //     .sort((a, b) => (a.danceability < b.danceability ? -this.order : this.order));
-    // }
-    // if (this.method.toLowerCase() === 'energy') {
-    //   this.tracks = this.tracks
-    //     .sort((a, b) => (a.energy < b.energy ? -this.order : this.order));
-    // }
-    // if (this.method.toLowerCase() === 'loudness') {
-    //   this.tracks = this.tracks
-    //     .sort((a, b) => (a.loudness < b.loudness ? -this.order : this.order));
-    // }
-    // if (this.method.toLowerCase() === 'positivity') {
-    //   this.tracks = this.tracks
-    //     .sort((a, b) => (a.valence < b.valence ? -this.order : this.order));
-    // }
     if (this.method.toLowerCase() === 'colour') {
       this.sortByColour();
     }else{
@@ -111,6 +87,18 @@ export class PlaylistSorterPageComponent implements OnInit {
   updateMethod(method: string): void {
     this.method = method;
     this.sortTracks();
+  }
+
+  addToSpotify(): void {
+    const isYes = confirm('Are you sure?');
+    if (isYes && this.method !== '') {
+      console.log('Adding Playlist');
+      this.spotifyService.createNewPlaylist(this.method, this.tracks, this.playlist.getId());
+    }
+
+    if (this.method === '') {
+      alert('Pick a way to sort');
+    }
   }
 
 }

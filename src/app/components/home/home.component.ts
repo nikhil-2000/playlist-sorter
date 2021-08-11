@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {Image} from '../../models/image';
 import {Track} from '../../models/track';
@@ -14,12 +14,22 @@ export class HomeComponent implements OnInit {
   playlist: Playlist;
   tracks: Array<Track>;
 
+  @ViewChild('loginComponent') loginComponent;
+
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.playlist = mockPlaylist;
     this.tracks = tracks;
+
+  }
+
+  ngAfterViewInit() {
+    console.log('In funcy');
+    if (this.loginComponent.isLoggedIn()){
+      console.log('Can get User');
+    }
   }
 
   login(): void {
@@ -1956,4 +1966,4 @@ const tracks = [
   // }
 ].map(track => new Track(track));
 
-mockPlaylist = new Playlist(mockPlaylistData.name, image, tracks,"59ZbFPES4DQwEjBpWHzrtC");
+mockPlaylist = new Playlist(mockPlaylistData.name, image, tracks, '59ZbFPES4DQwEjBpWHzrtC');
