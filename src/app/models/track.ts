@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 
 
 export class Track {
-  audio;  name;  preview;  popularity;  artists;  album;  image; id; danceability; tempo; href; energy; loudness; valence;
+  audio;  name;  preview;  popularity;  artists;  album;  image; id; danceability; tempo; href; energy; loudness; positivity;
 
   constructor( private trackObject: any) {
     this.name = trackObject.name;
@@ -25,11 +25,8 @@ export class Track {
     this.danceability = featuresObject.danceability;
     this.tempo = featuresObject.tempo;
     this.loudness = featuresObject.loudness;
-    this.valence = featuresObject.valence;
+    this.positivity = featuresObject.valence;
     this.energy = featuresObject.energy;
-    if (featuresObject.tempo === null) {
-      console.log('NULL TEMPO' + this.name);
-    }
   }
 
   getName(): string {

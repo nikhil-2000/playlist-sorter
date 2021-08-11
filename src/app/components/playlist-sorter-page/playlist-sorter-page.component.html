@@ -13,6 +13,7 @@
       <div class="text ">{{track.getName()}}</div>
       <div class="text ">{{track.getArtists()[0].name}}</div>
       <div class="text ">{{track.getAlbum().name}}</div>
+      <div *ngIf="this.method != ''" class="text ">{{this.method}}:{{track[this.method.toLowerCase()]}}</div>
     </mat-card>
   </div>
 

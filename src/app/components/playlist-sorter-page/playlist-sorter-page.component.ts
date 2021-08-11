@@ -20,7 +20,7 @@ export class PlaylistSorterPageComponent implements OnInit {
   tracks: Array<Track>;
   total: number;
 
-  method: string;
+  method = '';
   order = 1;
 
   ngOnInit(): void {
@@ -62,32 +62,35 @@ export class PlaylistSorterPageComponent implements OnInit {
 
   sortTracks(): void {
 
-    if (this.method.toLowerCase() === 'popularity') {
-      this.tracks = this.tracks
-        .sort((a, b) => (a.getPopularity() < b.getPopularity() ? -this.order : this.order));
-    }
-    if (this.method.toLowerCase() === 'tempo') {
-      this.tracks = this.tracks
-        .sort((a, b) => (a.tempo < b.tempo ? -this.order : this.order));
-    }
-    if (this.method.toLowerCase() === 'danceability') {
-      this.tracks = this.tracks
-        .sort((a, b) => (a.danceability < b.danceability ? -this.order : this.order));
-    }
-    if (this.method.toLowerCase() === 'energy') {
-      this.tracks = this.tracks
-        .sort((a, b) => (a.energy < b.energy ? -this.order : this.order));
-    }
-    if (this.method.toLowerCase() === 'loudness') {
-      this.tracks = this.tracks
-        .sort((a, b) => (a.loudness < b.loudness ? -this.order : this.order));
-    }
-    if (this.method.toLowerCase() === 'positivity') {
-      this.tracks = this.tracks
-        .sort((a, b) => (a.valence < b.valence ? -this.order : this.order));
-    }
+    // if (this.method.toLowerCase() === 'popularity') {
+    //   this.tracks = this.tracks
+    //     .sort((a, b) => (a.getPopularity() < b.getPopularity() ? -this.order : this.order));
+    // }
+    // if (this.method.toLowerCase() === 'tempo') {
+    //   this.tracks = this.tracks
+    //     .sort((a, b) => (a['tempo'] < b['tempo'] ? -this.order : this.order));
+    // }
+    // if (this.method.toLowerCase() === 'danceability') {
+    //   this.tracks = this.tracks
+    //     .sort((a, b) => (a.danceability < b.danceability ? -this.order : this.order));
+    // }
+    // if (this.method.toLowerCase() === 'energy') {
+    //   this.tracks = this.tracks
+    //     .sort((a, b) => (a.energy < b.energy ? -this.order : this.order));
+    // }
+    // if (this.method.toLowerCase() === 'loudness') {
+    //   this.tracks = this.tracks
+    //     .sort((a, b) => (a.loudness < b.loudness ? -this.order : this.order));
+    // }
+    // if (this.method.toLowerCase() === 'positivity') {
+    //   this.tracks = this.tracks
+    //     .sort((a, b) => (a.valence < b.valence ? -this.order : this.order));
+    // }
     if (this.method.toLowerCase() === 'colour') {
       this.sortByColour();
+    }else{
+      this.tracks = this.tracks
+        .sort((a, b) => (a[this.method.toLowerCase()] < b[this.method.toLowerCase()] ? -this.order : this.order));
     }
   }
 
