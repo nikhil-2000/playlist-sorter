@@ -143,7 +143,7 @@ export class SpotifyService {
 // );
     const createNewPlaylist = 'https://api.spotify.com/v1/users/' + this.user.getId() + '/playlists';
     const body = {
-      name: playlist.getName() + ' - Sorted By ' + method,
+      name: playlist.getName() + ' Sortified',
       description: playlist.getName() + ' is sorted by ' + method,
       public: false
     };

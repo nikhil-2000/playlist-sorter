@@ -1,8 +1,6 @@
 .playlist {
   display: flex;
-  flex-direction: row;
-  flex : 1;
-  /*width : 90%;*/
+  flex: calc(33.33% - 20px);
   margin: 20px;
   padding: 20px;
   align-items: center;
@@ -20,7 +18,7 @@
   width:95%;
   padding: 20px;
   text-align: right;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -31,9 +29,9 @@
 
 .playlists-container {
   display: flex; /* or inline-flex */
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width:95%;
-  margin: auto;
+  /*margin: auto;*/
   padding: 20px;
   text-align: center;
 }
@@ -61,15 +59,11 @@
   background-color: #222222;
 }
 
-.playlist-info {
-  width : 100%;
-}
-
 .current-playlist {
   display: flex;
   padding: 10px;
   color: white;
-  padding-right: 0px;
+  margin-left: auto;
 }
 .current-playlist-text {
   padding: 10px;
@@ -83,8 +77,6 @@
 }
 
 .mat-tab-label {
-  /*min-width: 25px !important;*/
-  /*padding: 5px;*/
   color: white;
   font-weight: 300;
 }
@@ -107,10 +99,21 @@
   color: white;
 }
 
+.filter-form {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 .filter-mat-form-field {
   width: 350px;
   font-size: 14px;
   margin-bottom: -15px;
+  background-color: #323232;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 3px;
+  border-radius: 10px;
 }
 
 .filter-mat-form-field mat-label {
@@ -130,4 +133,9 @@
 
 .filter-input {
   color: white;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
 }

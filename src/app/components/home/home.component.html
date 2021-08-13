@@ -10,17 +10,17 @@
         <app-login #loginComponent></app-login>
       </div>
   </div>
-  <mat-card mat-card-content class="image center">
-    <mat-card class = "track">
-      <app-playlist class="playlist" [playlist]="this.playlist" [showButton]="false"></app-playlist>
-    </mat-card>
-    <mat-card *ngFor="let track of this.tracks" class = "track">
-      <img *ngIf="this.playlist.getImage().url !== ''" src="{{track.getImage().url}}" class="resize">
-      <div class="track-text">{{track.getName()}}</div>
-      <div class="track-text">{{track.getArtists()[0].name}}</div>
-      <div class="track-text">{{track.getAlbum().name}}</div>
-    </mat-card>
-  </mat-card>
+  <!--<mat-card mat-card-content class="image center">-->
+    <!--<mat-card class = "track">-->
+      <!--<app-playlist class="playlist" [playlist]="this.playlist" [showButton]="false"></app-playlist>-->
+    <!--</mat-card>-->
+    <!--<mat-card *ngFor="let track of this.tracks" class = "track">-->
+      <!--<img *ngIf="this.playlist.getImage().url !== ''" src="{{track.getImage().url}}" class="resize">-->
+      <!--<div class="track-text">{{track.getName()}}</div>-->
+      <!--<div class="track-text">{{track.getArtists()[0].name}}</div>-->
+      <!--<div class="track-text">{{track.getAlbum().name}}</div>-->
+    <!--</mat-card>-->
+  <!--</mat-card>-->
 
 
 

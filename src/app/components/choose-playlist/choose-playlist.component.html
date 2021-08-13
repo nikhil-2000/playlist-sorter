@@ -1,8 +1,6 @@
 <div class="container">
   <div class="button-and-info">
-    <button mat-raised-button class="confirm-button" (click)="moveToSorter()" >
-      Confirm
-    </button>
+    <h1 class="text">Pick a Playlist...</h1>
     <div class="current-playlist">
       <div class="current-playlist-text">
         Chosen Playlist Name:<br>
@@ -12,14 +10,37 @@
         {{this.currentPlaylist?.getName()}}<br>{{this.currentPlaylist?.getTracks().total}}
       </div>
     </div>
+    <button mat-raised-button class="confirm-button" (click)="moveToSorter()">
+      Confirm
+    </button>
 
   </div>
 
 
-  <mat-tab-group class="playlists-container" dynamicHeight (selectedTabChange)="showCorrectPlaylists($event)"
-                 >
+  <mat-tab-group dynamicHeight (selectedTabChange)="showCorrectPlaylists($event)">
     <mat-tab (click)="showUserPlaylists()" label="Your Playlists" class="mat-tab-label">
 
+
+      <div class="playlists-container">
+        <form class="filter-form">
+          <mat-form-field class="filter-mat-form-field">
+            <mat-label>Type to Filter...</mat-label>
+            <input matInput
+                   type="text"
+                   (keyup)="onKey($event.target.value)"/>
+          </mat-form-field>
+        </form>
+
+        <mat-card class="playlist" *ngFor="let playlist of this.filteredPlaylists">
+          <app-playlist [playlist]="playlist"
+          [isSelected]="isPlaylistSelected(playlist)"
+          [showButton]="true"></app-playlist>
+        </mat-card>
+      </div>
+
+
+    </mat-tab>
+    <mat-tab (click)="showPlaylistSearch()" label="Search Playlists">
       <form class="filter-form">
         <mat-form-field class="filter-mat-form-field">
           <mat-label>Type to Filter...</mat-label>
@@ -29,33 +50,16 @@
         </mat-form-field>
       </form>
 
-      <mat-card class = "playlist" *ngFor="let playlist of this.filteredPlaylists">
-        <app-playlist [playlist]="playlist"
-                      [isSelected]="isPlaylistSelected(playlist)"
-                      [showButton]="true"
-                      class = "playlist-info"></app-playlist>
+      <mat-card class="playlist" *ngFor="let playlist of this.filteredPlaylists">
+        <app-playlist
+          [playlist]="playlist"
+          [isSelected]="isPlaylistSelected(playlist)"
+          [showButton]="true"
+          class="playlist-info"></app-playlist>
       </mat-card>
 
     </mat-tab>
-    <mat-tab (click)="showPlaylistSearch()" label="Search Playlists" >
-      <form class="filter-form">
-        <mat-form-field class="filter-mat-form-field">
-          <mat-label>Type to Filter...</mat-label>
-          <input matInput
-                 type="text"
-                 (keyup)="onKey($event.target.value)"/>
-        </mat-form-field>
-      </form>
 
-      <mat-card class = "playlist" *ngFor="let playlist of this.filteredPlaylists">
-      <app-playlist
-                    [playlist]="playlist"
-                    [isSelected]="isPlaylistSelected(playlist)"
-                    [showButton]="true"
-                    class = "playlist-info"></app-playlist>
-      </mat-card>
-
-    </mat-tab>
   </mat-tab-group>
 
 </div>

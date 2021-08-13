@@ -4,7 +4,6 @@ import {Track} from './track';
 export class Playlist {
   name: string; image: Image; tracks: Array<Track>; id: string;
   constructor(playlistData: any) {
-    console.log(playlistData);
     this.name = playlistData.name;
     if (playlistData.images.length > 0) {
       this.image = new Image();
