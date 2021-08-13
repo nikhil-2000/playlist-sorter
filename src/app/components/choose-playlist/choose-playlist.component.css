@@ -1,27 +1,47 @@
-.playlist {
-  display: flex;
-  flex: calc(33.33% - 20px);
-  margin: 20px;
-  padding: 20px;
-  align-items: center;
-  background-color: #1DB954;
-}
 
 .container {
   background-color: black;
   padding: 10px;
+  margin: 20px;
 }
 
 .button-and-info{
   display: flex; /* or inline-flex */
-  flex-wrap: nowrap;
-  width:95%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width:100%;
   padding: 20px;
   text-align: right;
   justify-content: flex-start;
   align-items: center;
 }
 
+.title {
+  width: 100%;
+}
+
+.confirm-button {
+  /*display: flex;*/
+  /*width: 20%;*/
+  /*height: 80%;*/
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  color: black;
+}
+
+.current-playlist {
+  display: flex;
+  padding: 3vmin;
+  color: white;
+  line-height: 1.7;
+}
+.current-playlist-text {
+  padding: 1vh;
+  color: white;
+  font-size: 2vmin;
+}
 
 .red-border {
   border: 4px solid red;
@@ -36,15 +56,14 @@
   text-align: center;
 }
 
-.confirm-button {
-  /*display: flex;*/
-  /*width: 20%;*/
-  /*height: 80%;*/
-  padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background-color: white;
-  color: black;
+.playlist {
+  display: flex;
+  flex: calc(33.33% - 20px);
+  width: 40%;
+  margin: 20px;
+  padding: 20px;
+  align-items: center;
+  background-color: #1DB954;
 }
 
 .button {
@@ -59,19 +78,6 @@
   background-color: #222222;
 }
 
-.current-playlist {
-  display: flex;
-  padding: 10px;
-  color: white;
-  margin-left: auto;
-}
-.current-playlist-text {
-  padding: 10px;
-  color: white;
-  flex: 0 0 auto;
-  padding-right: 0px;
-}
-
 .search {
   margin: 10px  10px 10px 6px;
 }
@@ -83,8 +89,6 @@
 
 /* Styles for the active tab label */
 .mat-tab-label.mat-tab-label-active {
-  /*min-width: 25px !important;*/
-  /*padding: 5px;*/
   color: white;
   font-weight: 300;
 }
@@ -100,12 +104,12 @@
 }
 
 .filter-form {
-  width: 100%;
+  width: 100vw;
   margin-bottom: 20px;
 }
 
 .filter-mat-form-field {
-  width: 350px;
+  width: 60vmin;
   font-size: 14px;
   margin-bottom: -15px;
   background-color: #323232;
@@ -139,3 +143,10 @@
   color: white;
   font-size: 20px;
 }
+
+/*.mat-h1 {*/
+  /*align-self: flex-start;*/
+  /*justify-self: flex-start;*/
+  /*text-align: left;*/
+  /*width: 100%;*/
+/*}*/

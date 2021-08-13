@@ -15,4 +15,14 @@ body {
 
 * {
   font-family: 'Atkinson Hyperlegible', sans-serif !important;
+  box-sizing: border-box;
+}
+
+.mat-h1, .mat-headline, .mat-typography h1 {
+  font-size: 5vw;
+  text-align: left;
+}
+
+.mat-icon, .material-icon{
+  font-family: 'Material Icons' !important;
 }

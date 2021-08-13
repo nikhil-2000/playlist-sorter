@@ -1,6 +1,6 @@
 <div class="container">
   <div class="button-and-info">
-    <h1 class="text">Pick a Playlist...</h1>
+    <h1 class="title text">Pick a Playlist...</h1>
     <div class="current-playlist">
       <div class="current-playlist-text">
         Chosen Playlist Name:<br>
@@ -9,10 +9,11 @@
       <div class="current-playlist-text">
         {{this.currentPlaylist?.getName()}}<br>{{this.currentPlaylist?.getTracks().total}}
       </div>
+      <button mat-raised-button class="confirm-button" (click)="moveToSorter()">
+        Go
+      </button>
     </div>
-    <button mat-raised-button class="confirm-button" (click)="moveToSorter()">
-      Confirm
-    </button>
+
 
   </div>
 
@@ -33,8 +34,8 @@
 
         <mat-card class="playlist" *ngFor="let playlist of this.filteredPlaylists">
           <app-playlist [playlist]="playlist"
-          [isSelected]="isPlaylistSelected(playlist)"
-          [showButton]="true"></app-playlist>
+                        [isSelected]="isPlaylistSelected(playlist)"
+                        [showButton]="true"></app-playlist>
         </mat-card>
       </div>
 

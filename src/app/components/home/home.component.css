@@ -11,9 +11,14 @@
   flex: 1;
 }
 
+.title {
+  color: white;
+  font-size: 5vmin;
+}
+
 .text {
   color: white;
-  font-size: 20px;
+  font-size: 4vmin;
 }
 
 .playlist {
@@ -22,7 +27,7 @@
 
 .content {
   max-height: 100%;
-  padding: 20px;
+  padding: 2em;
 }
 
 .center {

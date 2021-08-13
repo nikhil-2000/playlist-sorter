@@ -6,12 +6,8 @@
 }
 
 .resize {
-  max-width: 200px;
-  max-height: 200px;
-  min-height: 10px ;
-  min-width: 10px ;
-  width: 150px;
-  height: 150px;
+  width: 10vmin;
+  height: 10vmin;
 }
 
 .text {
@@ -24,12 +20,8 @@
   background-color: black;
   box-shadow: 5px 10px #317033;
   color: white;
-  max-width: 200px;
-  max-height: 200px;
-  min-height: 10px ;
-  min-width: 10px ;
-  width: 10vh;
-  height: 10vh;
+  width: 10vmin;
+  height: 10vmin;
   margin-left: auto;
   margin-right: 20px;
 

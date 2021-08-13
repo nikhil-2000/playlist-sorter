@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { PlaylistSorterPageComponent } from './components/playlist-sorter-page/playlist-sorter-page.component';
 import { PlaylistSortComponent } from './components/playlist-sort/playlist-sort.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PlaylistSortComponent } from './components/playlist-sort/playlist-sort.
     MatCardModule,
     MatTabsModule,
     MatRadioModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
