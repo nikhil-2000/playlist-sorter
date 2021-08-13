@@ -9,7 +9,7 @@
         Number of Tracks:
       </div>
       <div class="current-playlist-text">
-        {{this.currentPlaylist.getName()}}<br>{{this.currentPlaylist.getTracks() === null ? '' : this.currentPlaylist.getTracks().total}}
+        {{this.currentPlaylist?.getName()}}<br>{{this.currentPlaylist?.getTracks().total}}
       </div>
     </div>
 

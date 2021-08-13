@@ -20,7 +20,7 @@ export class AuthenticationService {
       querystring.stringify({
         response_type: 'code',
         client_id: environment.clientId,
-        scope: 'playlist-read-private playlist-read-collaborative',
+        scope: 'playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public',
         redirect_uri: this.redirectURI
       });
 

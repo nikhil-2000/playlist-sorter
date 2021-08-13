@@ -8,7 +8,9 @@ import {AuthenticationService} from './authentication.service';
 import {Observable, Subscription} from 'rxjs';
 import {Playlist} from '../models/playlist';
 import {Track} from '../models/track';
-import {concatMap} from "rxjs/operators";
+import {concatMap, subscribeOn} from 'rxjs/operators';
+import {User} from '../models/user';
+import { merge } from 'rxjs';
 
 
 @Injectable({
@@ -21,6 +23,8 @@ export class SpotifyService {
     access_token: '',
     refresh_token: ''
   };
+
+  user: User;
 
   chosenPlaylist: Playlist;
 
@@ -36,7 +40,10 @@ export class SpotifyService {
       this.getAccessToken().pipe(concatMap(tokens => {
         this.tokens = tokens;
         return this.getUser();
-      })).subscribe(data => console.log(data));
+      })).subscribe(data => {
+          this.user = new User(data);
+        }
+      );
     }
   }
 
@@ -106,7 +113,25 @@ export class SpotifyService {
     return this.http.get(query, {headers: this.getStandardHeader()});
   }
 
-  createNewPlaylist(method: string, tracks: Array<Track>, playlist_id: string): void {
+  addTracksToPlaylist(playlist: Playlist, tracks: Array<Track>): Observable<any> {
+    const addSongsInOrder = 'https://api.spotify.com/v1/playlists/' + playlist.getId() + '/tracks';
+    const uriListLength = 80;
+    let requests = new Array<Observable<any>>();
+    let i, temporary, body, req;
+    for (i = 0; i < tracks.length; i += uriListLength) {
+      console.log('Adding Tracks');
+      temporary = tracks.slice(i, i + uriListLength);
+      body = {
+        uris: temporary.map(t => t.uri),
+      };
+      req = this.http.post(addSongsInOrder, body, {headers: this.getStandardHeader()});
+      requests.push(req);
+    }
+
+    return merge(requests);
+  }
+
+  createNewPlaylist(method: string, tracks: Array<Track>, playlist: Playlist): void {
 //   firstPOSTCallToAPI('url', data).pipe(
 //     concatMap(result1 => secondPOSTCallToAPI('url', result1))
 //   concatMap( result2 => thirdPOSTCallToAPI('url', result2))
@@ -116,8 +141,23 @@ export class SpotifyService {
 //     success => { /* display success msg */ },
 // errorData => { /* display error msg */ }
 // );
-    const createNewPlaylist = 'https://api.spotify.com/v1/users/{user_id}/playlists';
-    const addSongsInOrder = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks';
+    const createNewPlaylist = 'https://api.spotify.com/v1/users/' + this.user.getId() + '/playlists';
+    const body = {
+      name: playlist.getName() + ' - Sorted By ' + method,
+      description: playlist.getName() + ' is sorted by ' + method,
+      public: false
+    };
+
+
+    this.http.post(createNewPlaylist, body, {headers: this.getStandardHeader()}).pipe(
+      concatMap(newPlaylistData => {
+        const newPlaylist = new Playlist(newPlaylistData);
+        return this.addTracksToPlaylist(newPlaylist, tracks);
+      })
+    ).subscribe(requests => {
+        requests.forEach(r => console.log(r));
+    });
+
 
   }
 }
@@ -126,12 +166,3 @@ interface TokenResponse {
   access_token: string;
   refresh_token: string;
 }
-
-
-// {
-//   "access_token": "BQCPJwkDgEJo1UpikkaOCycpBv29wynmJpKLfJRnA24AJl96vLM_4MH1FGcI3c5T_LFa27riMSmL4zx6r_gPnhIKRWIlkfoOH8Cw1lRHbpRLhVCtseUkwd899IfYuGNJHUj-Fjdfyy3f0PwZ3H4y2KNZEpH47T6xhGAVg89Ffd--vu2952hanQ",
-//   "token_type": "Bearer",
-//   "expires_in": 3600,
-//   "refresh_token": "AQB7iHKWj-6unvKmyTTxmE8QxgbYYyL1UfE9RSFe8w7Ki6empiESe28Itd_-GoJRaseg1DZPhumV-m064GjUA3MOLPwxKy3N78rk48fx-gJH0WRatBBrIbk-YYUP7AySAts",
-//   "scope": "playlist-read-private playlist-read-collaborative"
-// }

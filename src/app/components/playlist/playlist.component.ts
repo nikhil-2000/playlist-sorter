@@ -12,7 +12,7 @@ import {Image} from '../../models/image';
 export class PlaylistComponent implements OnInit {
 
   @Input() playlist: Playlist;
-  @Input() isSelected: boolean;
+  // @Input() isSelected: boolean;
   @Input() showButton: boolean;
 
   @ViewChild('buttonElement') buttonRef: ElementRef;
@@ -21,7 +21,7 @@ export class PlaylistComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.playlist.getImage() == null){
-      const img = new Image()
+      const img = new Image();
       img.url = 'assets/no_playlist_image.png';
       this.playlist.setImage(img);
     }

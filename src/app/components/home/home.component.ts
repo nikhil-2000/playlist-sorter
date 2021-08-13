@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Image} from '../../models/image';
 import {Track} from '../../models/track';
 import {Playlist} from '../../models/playlist';
+import {SpotifyService} from "../../services/spotify.service";
 
 @Component({
   selector: 'app-home',
@@ -17,19 +18,12 @@ export class HomeComponent implements OnInit {
   @ViewChild('loginComponent') loginComponent;
 
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private spotifyService: SpotifyService) {}
 
   ngOnInit(): void {
     this.playlist = mockPlaylist;
     this.tracks = tracks;
 
-  }
-
-  ngAfterViewInit() {
-    console.log('In funcy');
-    if (this.loginComponent.isLoggedIn()){
-      console.log('Can get User');
-    }
   }
 
   login(): void {
@@ -44,11 +38,11 @@ let mockPlaylist;
 
 const mockPlaylistData = {
   name: '😴',
-  image: {
+  images: [{
     height: null,
     url: 'https://i.scdn.co/image/ab67706c0000bebbb02e1e7f393323ff7cffe409',
     width: null
-  },
+  }],
   tracks: {
     href: 'https://api.spotify.com/v1/playlists/6h5LVYdbXaFCK7BdttuF3P/tracks',
     total: 63
@@ -1966,4 +1960,4 @@ const tracks = [
   // }
 ].map(track => new Track(track));
 
-mockPlaylist = new Playlist(mockPlaylistData.name, image, tracks, '59ZbFPES4DQwEjBpWHzrtC');
+mockPlaylist = new Playlist(mockPlaylistData);

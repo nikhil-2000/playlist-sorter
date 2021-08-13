@@ -4,7 +4,8 @@ import {Injectable} from '@angular/core';
 
 
 export class Track {
-  audio;  name;  preview;  popularity;  artists;  album;  image; id; danceability; tempo; href; energy; loudness; positivity;
+  audio;  name;  preview;  popularity;  artists;  album;  image; id;
+  danceability; tempo; href; energy; loudness; positivity; uri;
 
   constructor( private trackObject: any) {
     this.name = trackObject.name;
@@ -19,6 +20,7 @@ export class Track {
     this.image.width = trackObject.album.images[0].width;
     this.id = trackObject.id;
     this.href = trackObject.href;
+    this.uri = trackObject.uri;
   }
 
   addAudioFeatures(featuresObject: any): void{

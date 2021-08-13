@@ -2,7 +2,9 @@
   <div class="content center">
       <div>
         <h1 class = "text" *ngIf="!loginComponent.isLoggedIn()"> <b>Playlist Sorter</b> </h1>
-        <h1 class = "text" *ngIf="loginComponent.isLoggedIn()"> <b>Hello</b> </h1>
+        <h1 class = "text" *ngIf="loginComponent.isLoggedIn()">
+          <b>Hello {{this.spotifyService.user?.getName().split(' ')[0]}}</b>
+        </h1>
         <p class = "text" > Sort your playlists by popularity, album colour and much more...</p>
         <!--<button mat-raised-button color="primary" (click)="login()"> Begin</button>-->
         <app-login #loginComponent></app-login>
