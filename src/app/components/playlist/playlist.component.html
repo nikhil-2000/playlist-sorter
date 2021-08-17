@@ -1,6 +1,7 @@
-
-<div class = "container">
+<mat-card #buttonRef *ngIf="showButton" (click)="onSelect()" class="button" tabindex="0">
   <img *ngIf="this.playlist.getImage().url !== ''" src="{{this.playlist.getImage().url}}" class="resize">
   <p class="text ">{{this.playlist.getName()}}</p>
-  <button mat-raised-button #buttonElement *ngIf="showButton" (click)="onSelect()" class="button">&#10004;</button>
-</div>
+  &#10004;
+  <!--<button mat-raised-button #buttonElement *ngIf="showButton" (click)="onSelect()" class="button">&#10004;</button>-->
+</mat-card>
+

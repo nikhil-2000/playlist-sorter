@@ -1,40 +1,35 @@
-.container {
+.button {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  background-color: transparent;
+  width: 30vmin;
+  height: fit-content;
+  background-color: #90f2e2;
+  box-shadow: 5px 10px #323232;
+  color: white;
+  margin: auto;
 }
 
 .resize {
-  width: 10vmin;
-  height: 10vmin;
+  object-fit: cover;
+  width: 20vmin;
+  height: 20vmin;
 }
 
 .text {
   color: black;
-  padding: 30px;
-  font-size: 20px;
-}
-
-.button {
-  background-color: black;
-  box-shadow: 5px 10px #317033;
-  color: white;
-  width: 10vmin;
-  height: 10vmin;
-  margin-left: auto;
-  margin-right: 20px;
-
+  font-size: 2.5vmin;
 }
 
 .button:hover {
-  background-color: #222222;
+  background-color: #73c7b8;
 }
 
 .button:focus {
   outline: none;
-  background-color: white;
+  background-color: #73c7b8;
   color: black;
-  -webkit-box-shadow: inset 0px 0px 15px #317033;
-  -moz-box-shadow: inset 0px 0px 15px #317033;
-  box-shadow: inset 0px 0px 15px #317033;}
+
+  -webkit-box-shadow: inset 0px 0px 15px #60a399;
+  -moz-box-shadow: inset 0px 0px 15px #60a399;
+  box-shadow: inset 0px 0px 15px #60a399;}

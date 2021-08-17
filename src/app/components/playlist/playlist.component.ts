@@ -15,12 +15,13 @@ export class PlaylistComponent implements OnInit {
   // @Input() isSelected: boolean;
   @Input() showButton: boolean;
 
-  @ViewChild('buttonElement') buttonRef: ElementRef;
+  @ViewChild('buttonRef', {read: ElementRef}) buttonRef: ElementRef;
 
-  constructor(public choosePlaylistService: ChoosePlaylistService) { }
+  constructor(public choosePlaylistService: ChoosePlaylistService) {
+  }
 
   ngOnInit(): void {
-    if (this.playlist.getImage() == null){
+    if (this.playlist.getImage() == null) {
       const img = new Image();
       img.url = 'assets/no_playlist_image.png';
       this.playlist.setImage(img);
@@ -30,6 +31,6 @@ export class PlaylistComponent implements OnInit {
 
   onSelect(): void {
     this.choosePlaylistService.setPlaylist(this.playlist);
-    this.buttonRef.nativeElement.focus();
+    setTimeout(() => this.buttonRef.nativeElement.focus());
   }
 }

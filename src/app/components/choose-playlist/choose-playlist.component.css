@@ -17,30 +17,27 @@
 }
 
 .title {
-  width: 100%;
+  width: 50%;
 }
 
 .confirm-button {
-  /*display: flex;*/
-  /*width: 20%;*/
-  /*height: 80%;*/
-  padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
   background-color: white;
   color: black;
+  margin-left: auto;
 }
 
 .current-playlist {
   display: flex;
-  padding: 3vmin;
+  padding: 3vmin 0;
   color: white;
   line-height: 1.7;
+  width: 100%;
 }
 .current-playlist-text {
   padding: 1vh;
   color: white;
   font-size: 2vmin;
+
 }
 
 .red-border {
@@ -50,26 +47,24 @@
 .playlists-container {
   display: flex; /* or inline-flex */
   flex-wrap: wrap;
-  width:95%;
+  flex: 1;
   /*margin: auto;*/
-  padding: 20px;
+  padding: 2vmin;
   text-align: center;
 }
 
 .playlist {
   display: flex;
-  flex: calc(33.33% - 20px);
-  width: 40%;
-  margin: 20px;
-  padding: 20px;
+  /*flex: 1 0 21%;*/
+  flex-grow: 1;
+  margin: 1vmin;
   align-items: center;
-  background-color: #1DB954;
 }
 
 .button {
   width: 20%;
   height: 80%;
-  margin: 5px;
+  margin: 1vmin;
   background-color: white;
   color: black;
 }

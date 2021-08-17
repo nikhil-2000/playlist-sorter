@@ -17,7 +17,7 @@ export class ChoosePlaylistComponent implements OnInit {
   // userPlaylists = this.convertToPlaylistObject(mockPlaylists);
   userPlaylists = new Array<Playlist>();
   filteredPlaylists = new Array<Playlist>();
-  currentPlaylist: Playlist;
+  currentPlaylist: Playlist = null;
   isUserPlaylists = true;
   nextIsNull = false;
   maxPlaylists = 1000;
